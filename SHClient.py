@@ -1,7 +1,10 @@
 import websocket
 import MessageHandler
 import DBHandler
+from Notification import Error
 import asyncio
+import sys
+
 class MyWebSocketClient:
     def __init__(self, url):
         self.msg_h      = MessageHandler.MsgHandler()
@@ -31,6 +34,11 @@ class MyWebSocketClient:
     def run(self):
         self.ws.run_forever()
 
-
-client = MyWebSocketClient("ws://localhost:8765")
-asyncio.run(client.run())
+port_number = sys.argv[1:]
+if (port_number):
+    client = MyWebSocketClient(f"ws://localhost:{sys.argv[1]}")
+    asyncio.run(client.run())
+else:
+    Error("Provide a port Number : python script.py [port_number]")
+    quit()
+    
