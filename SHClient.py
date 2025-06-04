@@ -18,8 +18,8 @@ class MyWebSocketClient:
         )
 
     def on_message(self, ws, message):
-        #print("On Message")
-        self.msg_h.filter_message(message,self.db_handler)
+        print("On Message")
+        #self.msg_h.filter_message(message,self.db_handler)
 
     def on_error(self, ws, error):
         print(f"Error: {error}")
@@ -36,7 +36,7 @@ class MyWebSocketClient:
 
 port_number = sys.argv[1:]
 if (port_number):
-    client = MyWebSocketClient(f"ws://localhost:{sys.argv[1]}")
+    client = MyWebSocketClient(f"ws://25.29.212.186/topic/news-delay-based-on-kesney-meetings-performance:{sys.argv[1]}")
     asyncio.run(client.run())
 else:
     Error("Provide a port Number : python script.py [port_number]")
